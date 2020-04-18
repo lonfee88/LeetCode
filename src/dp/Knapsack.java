@@ -1,5 +1,8 @@
 package dp;
 
+/**
+ * https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie/bei-bao-wen-ti
+ */
 public class Knapsack {
 
     private int max;
