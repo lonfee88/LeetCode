@@ -29,6 +29,7 @@ public class CharacterReplacement {
             maxChar = Math.max(maxChar, charCount[s.charAt(right) - 'A']);
             System.out.println("add right:" + right);
             // 不满足结果的时候，收缩窗口一次，使得满足条件，right继续移动
+            // 出现次数最多的字母次数+k大于串长度，即为满足掉件
             if (maxChar + k < right - left + 1) {
                 // window.remove
                 charCount[s.charAt(left) - 'A']--;
