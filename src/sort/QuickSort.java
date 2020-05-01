@@ -16,19 +16,16 @@ public class QuickSort {
     private int partition(int[] a, int left, int right) {
         int temp = a[left];
         while (left < right) {
-            while (left < right && a[right] > temp) {
+            // 注意要取等号，否则当全部待排序数字都相同的时候会死循环！
+            while (left < right && a[right] >= temp) {
                 right--;
             }
-            if (left < right) {
-                a[left] = a[right];
-            }
-
-            while (left < right && a[left] < temp) {
+            a[left] = a[right];
+            // pay attention to the equal, otherwise it will get into endless loop!
+            while (left < right && a[left] <= temp) {
                 left++;
             }
-            if (left < right) {
-                a[right] = a[left];
-            }
+            a[right] = a[left];
         }
         a[left] = temp;
         return left;
@@ -45,8 +42,8 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int a[] = { 5, 4, 9, 1, 7, 6, 2, 3, 8 };
-        new QuickSort().sort(a, 0, 8);
-        System.out.println(Arrays.toString(a));
+        int[] nums = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+        new QuickSort().sort(nums, 0, nums.length - 1);
+        System.out.println(Arrays.toString(nums));
     }
 }
