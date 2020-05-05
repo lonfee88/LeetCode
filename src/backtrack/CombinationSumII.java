@@ -50,40 +50,30 @@ public class CombinationSumII {
             return res;
         }
         Arrays.sort(candidates);
-        helper(res, new ArrayList<Integer>(), candidates, target, 0, 0);
-
+        helper(res, new ArrayList<>(), candidates, target, 0);
         return res;
     }
 
     private void helper(List<List<Integer>> res, List<Integer> cur, int[] candidates, int target,
-                        int sum, int index) {
-        if (index == candidates.length) {
-            if (sum == target) {
+                        int index) {
+        if (target <= 0) {
+            if (target == 0) {
                 res.add(new ArrayList<>(cur));
             }
             return;
         }
 
-        // 当前元素加进来一定不合适
-        if (sum + candidates[index] > target) {
-            // 直接下一个元素
-            helper(res, cur, candidates, target, sum, index + 1);
-            return;
+        for (int i = index; i < candidates.length; i++) {
+            // 加进当前元素
+            cur.add(candidates[i]);
+            // 用i+1，因为不可以重复选择
+            helper(res, cur, candidates, target - candidates[i], i + 1);
+            // 回溯
+            cur.remove(cur.size() - 1);
+            // 忽略重复元素
+            while (i + 1 < candidates.length && candidates[i] == candidates[i + 1]) {
+                i++;
+            }
         }
-
-        // 加进当前元素
-        cur.add(candidates[index]);
-        sum += candidates[index];
-        helper(res, cur, candidates, target, sum, index + 1);
-
-        // 回溯
-        cur.remove(cur.size() - 1);
-        sum -= candidates[index];
-        // 去除重复
-        while (index + 1 < candidates.length && candidates[index] == candidates[index + 1]) {
-            index++;
-        }
-        helper(res, cur, candidates, target, sum, index + 1);
-
     }
 }
