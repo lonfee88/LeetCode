@@ -47,11 +47,5 @@ public class HuiWen {
         //Scanner in = new Scanner(System.in);
         //int a = in.nextInt();
         //System.out.println(a);
-        Main main = new Main();
-        System.out.println(main.getMaxStr(""));
-        System.out.println(main.getMaxStr("1"));
-        System.out.println(main.getMaxStr("11"));
-        System.out.println(main.getMaxStr("1213"));
-        System.out.println(main.getMaxStr("01213"));
     }
 }
