@@ -42,8 +42,9 @@ public class SimpleBlockingQueue {
     }
 
     public void add(int data) {
+        // java doc 推荐lock放在try之前
+        lock.lock();
         try {
-            lock.lock();
             try {
                 while (size >= capacity) {
                     System.out.println("队列已满，释放锁，等待消费者消费数据");
@@ -62,8 +63,9 @@ public class SimpleBlockingQueue {
     }
 
     public int take() {
+        // java doc 推荐lock放在try之前
+        lock.lock();
         try {
-            lock.lock();
             try {
                 while (size == 0) {
                     System.out.println("阻塞队列空了，释放锁，等待生产者生产数据");
