@@ -48,6 +48,8 @@ public class SimpleBlockingQueue {
             try {
                 while (size >= capacity) {
                     System.out.println("队列已满，释放锁，等待消费者消费数据");
+                    // await会释放锁，并阻塞当前线程
+                    // 否则两个lock()会死锁
                     isFull.await();
                 }
             } catch (InterruptedException e) {
