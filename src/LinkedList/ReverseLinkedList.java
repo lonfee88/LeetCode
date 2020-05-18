@@ -93,10 +93,9 @@ public class ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         ListNode pre = null;
         ListNode cur = head;
-        ListNode next;
         while (cur != null) {
             // 保存 next
-            next = cur.next;
+            ListNode next = cur.next;
             // 反转
             cur.next = pre;
             // 前进
