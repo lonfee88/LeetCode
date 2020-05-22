@@ -25,6 +25,15 @@ public class LowestCommonAncestor {
         }
     }
 
+    /**
+     *
+     * ºóÐø±éÀú£¬dfs
+     *
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == p || root == q || root == null) {
             return root;
