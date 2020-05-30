@@ -1,64 +1,50 @@
 public class Main {
-
-    public class ListNode {
+    public static class TreeNode {
         int      val;
-        ListNode next;
+        TreeNode left;
+        TreeNode right;
 
-        ListNode(int x) {
+        TreeNode(int x) {
             val = x;
         }
     }
 
-    public ListNode reverseBetween(ListNode head, int m, int n) {
-        int i = 1;
-        ListNode newHeadPre = null;
-        ListNode newHead = null;
-        ListNode newTailNext = null;
-        ListNode newTail = null;
+    public int rob(TreeNode root) {
+        return helper(root, false);
+    }
 
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null) {
-            if (i > m && i <= n) {
-                // 淇濆瓨next
-                ListNode next = cur.next;
-
-                // 鍙嶈浆
-                cur.next = pre;
-
-                // 鍓嶈繘
-                pre = cur;
-                cur = next;
-            } else {
-                // 璁板綍鍙嶈浆鍓嶇殑鑺傜偣
-                if (i + 1 == m) {
-                    newHeadPre = cur;
-                    newTail = cur.next;
-                }
-                if (i - 1 == n) {
-                    newTailNext = cur;
-                    newHead = pre;
-                }
-
-                // 鍓嶈繘
-                pre = cur;
-                cur = cur.next;
-            }
-            i++;
+    int helper(TreeNode node, boolean flag) {
+        if (node == null) {
+            return 0;
         }
-        if (newHeadPre != null) {
-            newHeadPre.next = newHead;
+        System.out.println(String.format("[%d]: " + flag, node.val));
+        // 抢了parent
+        if (flag) {
+            // 当前节点不能抢
+            return helper(node.left, false) + helper(node.right, false);
         }
-        if (newTail != null) {
-            newTail.next = newTailNext;
+        // 当前节点可抢，可不抢
+        else {
+            // left
+            int tmp1 = helper(node.left, true) + helper(node.right, true) + +node.val;
+            //right
+            int tmp2 = helper(node.left, false) + helper(node.right, false);
+            return Math.max(tmp1, tmp2);
         }
-        return head;
     }
 
     public static void main(String[] args) {
-        //Scanner in = new Scanner(System.in);
-        //int a = in.nextInt();
-        //System.out.println(a);
+        TreeNode root = new TreeNode(1);
+        TreeNode t1 = new TreeNode(2);
+        TreeNode t2 = new TreeNode(3);
+        root.left = t1;
+        root.right = t2;
+        TreeNode t3 = new TreeNode(4);
+        TreeNode t4 = new TreeNode(5);
+        t1.right = t3;
+        t2.right = t4;
+
+        System.out.println(new Main().rob(root));
 
     }
 }
