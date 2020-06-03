@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Main {
     public static class TreeNode {
         int      val;
@@ -9,42 +11,45 @@ public class Main {
         }
     }
 
-    public int rob(TreeNode root) {
-        return helper(root, false);
-    }
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
 
-    int helper(TreeNode node, boolean flag) {
-        if (node == null) {
-            return 0;
+        // 0 没着色  1 红色  2 蓝色
+        int[] color = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (color[i] == 0) {
+                Stack<Integer> stack = new Stack<>();
+                stack.push(i);
+                // 着色
+                color[i] = 1;
+
+                while (!stack.isEmpty()) {
+                    int tmp = stack.pop();
+                    int[] neig = graph[tmp];
+                    for (int node : neig) {
+                        if (color[node] == 0) {
+                            // 着色
+                            color[node] = color[tmp] == 1 ? 2 : 1;
+                            stack.push(node);
+                        } else if (color[node] != color[tmp]) {
+                            return false;
+                        }
+                    }
+                }
+            }
         }
-        System.out.println(String.format("[%d]: " + flag, node.val));
-        // 抢了parent
-        if (flag) {
-            // 当前节点不能抢
-            return helper(node.left, false) + helper(node.right, false);
-        }
-        // 当前节点可抢，可不抢
-        else {
-            // left
-            int tmp1 = helper(node.left, true) + helper(node.right, true) + +node.val;
-            //right
-            int tmp2 = helper(node.left, false) + helper(node.right, false);
-            return Math.max(tmp1, tmp2);
-        }
+        return true;
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
-        TreeNode t1 = new TreeNode(2);
-        TreeNode t2 = new TreeNode(3);
-        root.left = t1;
-        root.right = t2;
-        TreeNode t3 = new TreeNode(4);
-        TreeNode t4 = new TreeNode(5);
-        t1.right = t3;
-        t2.right = t4;
-
-        System.out.println(new Main().rob(root));
+        int[][] prerequisites = new int[4][2];
+        // [[1,3],[0,2],[1,3],[0,2]]
+        prerequisites[0] = new int[] { 1, 3 };
+        prerequisites[1] = new int[] { 0, 2 };
+        prerequisites[2] = new int[] { 1, 3 };
+        prerequisites[3] = new int[] { 0, 2 };
+        System.out.println(new Main().isBipartite(prerequisites));
 
     }
 }
