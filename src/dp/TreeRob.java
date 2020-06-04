@@ -45,7 +45,7 @@ public class TreeRob {
         int[] dp = new int[2];
         // node节点不偷，子节点可偷可不偷，取最大值
         dp[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
-        // node节点不偷，子节点不可偷
+        // node节点偷，子节点不可偷
         dp[1] = node.val + left[0] + right[0];
         return dp;
     }
