@@ -32,6 +32,26 @@ public class MaxProduct {
 
     /**
      *
+     * 不用判断正负，直接比较最值即可
+     *
+     * @param nums
+     * @return
+     */
+    public int maxProduct(int[] nums) {
+        int result = nums[0];
+        int preMax = 1, preMin = 1;
+        for (int num : nums) {
+            int max = Math.max(num, Math.max(preMax * num, preMin * num));
+            int min = Math.min(num, Math.min(preMax * num, preMin * num));
+            result = Math.max(result, max);
+            preMin = min;
+            preMax = max;
+        }
+        return result;
+    }
+
+    /**
+     *
      * 解题思路
      分析可知, 在没有0的情况下, 最大子数组一定是从一端开始的
      证明:
