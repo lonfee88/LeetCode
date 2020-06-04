@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 一个基于信号量Semaphore的对象池实现
+ * 【不常考】
  *
  * http://www.blogjava.net/xylz/archive/2010/07/13/326021.html
  *

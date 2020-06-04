@@ -79,7 +79,7 @@ public class WordFind {
     private boolean find(int i, int j, int start) {
         System.out.println(String.format("[%d][%d]:%s ________ ", i, j, word));
         // base case
-        // 没访问过才进行的递归调用
+        // 已匹配到最后一个字符
         if (start == word.length() - 1) {
             return board[i][j] == word.charAt(start);
         }
@@ -91,6 +91,7 @@ public class WordFind {
             for (int l = 0; l < index1.length; l++) {
                 int newX = i + index1[l];
                 int newY = j + index2[l];
+                // 没访问过才进行的递归调用
                 if (newX < 0 || newY < 0 || newX >= m || newY >= n || visited[newX][newY] == true) {
                     continue;
                 }

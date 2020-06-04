@@ -59,7 +59,7 @@ public class FindMedianSortedArrays {
 
     /**
      *
-     *
+     *  查找第K个数
      *
      * @param nums1
      * @param nums2

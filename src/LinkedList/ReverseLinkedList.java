@@ -62,10 +62,12 @@ public class ReverseLinkedList {
         return cur;
     }
 
+    // 记录后继节点
     private ListNode successor;
 
     public ListNode reverseListReN(ListNode head, int n) {
         if (n == 1) {
+            // 记录后继节点
             successor = head.next;
             return head;
         }

@@ -59,6 +59,7 @@ public class LadderLength {
         Set<String> set = new HashSet<>();
         queue.offer(beginWord);
         while (!queue.isEmpty()) {
+            // 获得长度，一遍将当层的都出队
             int size = queue.size();
             count++;
             for (int i = 0; i < size; i++) {
