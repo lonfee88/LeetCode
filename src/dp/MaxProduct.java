@@ -41,6 +41,7 @@ public class MaxProduct {
         int result = nums[0];
         int preMax = 1, preMin = 1;
         for (int num : nums) {
+            // 必须以num结尾：所以要么是当前数，要么是和之前min或max相乘
             int max = Math.max(num, Math.max(preMax * num, preMin * num));
             int min = Math.min(num, Math.min(preMax * num, preMin * num));
             result = Math.max(result, max);
