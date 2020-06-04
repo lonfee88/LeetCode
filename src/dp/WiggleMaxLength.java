@@ -39,6 +39,33 @@ public class WiggleMaxLength {
 
     /**
      *
+     * 优化变量：up down
+     *
+     * 和TreeRob相似，两个变量：抢或不抢
+     * 和MaxProduct相似：min max
+     *
+     * @param nums
+     * @return
+     */
+    public int wiggleMaxLength(int[] nums) {
+        int len = nums.length;
+        if (len < 2) {
+            return len;
+        }
+        int up = 1;
+        int down = 1;
+        for (int i = 1; i < len; i++) {
+            if (nums[i] > nums[i - 1]) {
+                up = down + 1;
+            } else if (nums[i] < nums[i - 1]) {
+                down = up + 1;
+            }
+        }
+        return Math.max(up, down);
+    }
+
+    /**
+     *
      * https://leetcode-cn.com/problems/wiggle-subsequence/solution/bai-dong-xu-lie-by-leetcode/
      *
      * @param nums
@@ -66,30 +93,6 @@ public class WiggleMaxLength {
             }
         }
         return Math.max(up[len - 1], down[len - 1]);
-    }
-
-    /**
-     *
-     * 优化变量
-     *
-     * @param nums
-     * @return
-     */
-    public int wiggleMaxLength(int[] nums) {
-        int len = nums.length;
-        if (len < 2) {
-            return len;
-        }
-        int up = 1;
-        int down = 1;
-        for (int i = 1; i < len; i++) {
-            if (nums[i] > nums[i - 1]) {
-                up = down + 1;
-            } else if (nums[i] < nums[i - 1]) {
-                down = up + 1;
-            }
-        }
-        return Math.max(up, down);
     }
 
 }
