@@ -34,6 +34,8 @@ public class SimpleBlockingQueue {
     private Condition     isNull    = lock.newCondition();
     // 队列已满
     private Condition     isFull    = lock.newCondition();
+
+    // volatile 很重要
     private volatile int  size;
     private volatile int  capacity;
 
@@ -79,6 +81,7 @@ public class SimpleBlockingQueue {
             }
             --size;
             int res = container.get(0);
+            // 出队，remove 0
             container.remove(0);
             isFull.signal();
             return res;
