@@ -19,7 +19,7 @@ public class PerMute {
             return res;
         }
         boolean[] visited = new boolean[nums.length];
-        helper(res, new ArrayList<Integer>(), nums, visited);
+        helper(res, new ArrayList<>(), nums, visited);
         return res;
     }
 
