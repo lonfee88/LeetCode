@@ -65,14 +65,14 @@ public class ReverseLinkedList {
     // 记录后继节点
     private ListNode successor;
 
-    public ListNode reverseListReN(ListNode head, int n) {
-        if (n == 1) {
+    public ListNode reverseListReN(ListNode head, int k) {
+        if (k == 1) {
             // 记录后继节点
             successor = head.next;
             return head;
         }
         // 新的head
-        ListNode cur = reverseListReN(head.next, n - 1);
+        ListNode cur = reverseListReN(head.next, k - 1);
         head.next.next = head;
         head.next = successor;
         return cur;
